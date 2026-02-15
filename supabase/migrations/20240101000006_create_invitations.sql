@@ -1,3 +1,5 @@
+create extension if not exists pgcrypto with schema extensions;
+
 create type public.invitation_status as enum ('pending', 'accepted', 'declined', 'expired');
 
 create table public.invitations (
@@ -6,7 +8,7 @@ create table public.invitations (
   invited_by uuid references public.profiles(id) not null,
   invited_email text not null,
   role public.crew_role default 'crew' not null,
-  token text unique not null default encode(gen_random_bytes(32), 'hex'),
+  token text unique not null default encode(extensions.gen_random_bytes(32), 'hex'),
   status public.invitation_status default 'pending' not null,
   expires_at timestamptz default (now() + interval '7 days') not null,
   accepted_at timestamptz,
