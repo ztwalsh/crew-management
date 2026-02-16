@@ -4,7 +4,7 @@ import { Users, Mail, Clock, ShieldCheck } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
-import { CrewMemberCard } from '@/components/crew/crew-member-card'
+import { CrewViewToggle } from '@/components/crew/crew-view-toggle'
 import { InviteCrewDialog } from '@/components/crew/invite-crew-dialog'
 import { RevokeInvitationButton } from '@/components/crew/revoke-invitation-button'
 import type { CrewRole, CrewMemberWithProfile } from '@/types'
@@ -92,19 +92,14 @@ export default async function CrewPage({
         )}
       </div>
 
-      {/* Active crew members grid */}
+      {/* Active crew members */}
       {sortedCrew.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {sortedCrew.map((member) => (
-            <CrewMemberCard
-              key={member.id}
-              member={member}
-              currentUserRole={userRole}
-              boatId={boatId}
-              isCurrentUser={member.user_id === user.id}
-            />
-          ))}
-        </div>
+        <CrewViewToggle
+          members={sortedCrew}
+          currentUserRole={userRole}
+          boatId={boatId}
+          currentUserId={user.id}
+        />
       ) : (
         <Card className="bg-[#22252F] border-border/50">
           <CardContent className="flex flex-col items-center justify-center py-12">

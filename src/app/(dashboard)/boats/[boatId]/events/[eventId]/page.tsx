@@ -16,6 +16,7 @@ import { Separator } from '@/components/ui/separator'
 import { RsvpButtons } from '@/components/events/rsvp-buttons'
 import { AvailabilitySummary } from '@/components/events/availability-summary'
 import { DeleteEventButton } from '@/components/events/delete-event-button'
+import { EditEventDialog } from '@/components/events/edit-event-dialog'
 import type { CrewRole, EventType, RsvpStatus } from '@/types'
 
 const eventTypeColors: Record<EventType, string> = {
@@ -172,6 +173,7 @@ export default async function EventDetailPage({
           {/* Admin actions */}
           {isOwnerOrAdmin && (
             <div className="flex items-center gap-2 shrink-0">
+              <EditEventDialog eventId={eventId} event={event} />
               <DeleteEventButton eventId={eventId} boatId={boatId} />
             </div>
           )}
