@@ -3,6 +3,7 @@ import { createClient } from '@/utils/supabase/server'
 import { Sidebar } from '@/components/layout/sidebar'
 import { MobileNav } from '@/components/layout/mobile-nav'
 import { Header } from '@/components/layout/header'
+import { CopilotTrigger } from '@/components/copilot/copilot-trigger'
 
 export default async function DashboardLayout({
   children,
@@ -56,6 +57,7 @@ export default async function DashboardLayout({
         </main>
       </div>
       <MobileNav boats={boats} />
+      <CopilotTrigger />
     </div>
   )
 }

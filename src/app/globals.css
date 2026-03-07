@@ -135,3 +135,130 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+/* ===== Workspace Chat Animations ===== */
+
+/* Typing dots */
+.typing-dot {
+  animation: typing-bounce 1.4s ease-in-out infinite;
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* Welcome message appear */
+.welcome-appear {
+  animation: welcome-fade 0.6s ease-out forwards;
+}
+
+@keyframes welcome-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* User message slide in from right */
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(12px) translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* Component materialize (fade + scale up from 95%) */
+.component-materialize {
+  animation: materialize 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.15s;
+  opacity: 0;
+}
+
+@keyframes materialize {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Checkmark stroke draw animation */
+.checkmark-draw {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: draw-check 0.4s ease-out 0.2s forwards;
+}
+
+@keyframes draw-check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Glass card effect */
+.glass-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Compass ghost rotation */
+.compass-ghost {
+  animation: compass-drift 20s linear infinite;
+}
+
+@keyframes compass-drift {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Pin button hover reveal */
+.pin-button {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.pin-button:hover {
+  transform: scale(1.1);
+}
+
+/* Chat message AI fade-in */
+.chat-message-ai.latest {
+  animation: ai-appear 0.3s ease-out forwards;
+}
+
+@keyframes ai-appear {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Workspace shell override — forces deep navy background */
+.workspace-shell {
+  background: #0a0f1e;
+}

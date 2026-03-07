@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import { CreateEventDialog } from '@/components/events/create-event-dialog'
 import { EventsViewToggle } from '@/components/events/events-view-toggle'
+import { ImportEventsButton } from '@/components/import/import-events-button'
+import { ExportEventsButton } from '@/components/import/export-events-button'
 import type { CrewRole } from '@/types'
 
 export default async function EventsPage({
@@ -64,7 +66,18 @@ export default async function EventsPage({
           <h1 className="text-2xl font-bold tracking-tight">Events</h1>
           <p className="text-sm text-muted-foreground mt-1">{boat.name}</p>
         </div>
-        {isOwnerOrAdmin && <CreateEventDialog boatId={boatId} />}
+        <div className="flex items-center gap-2">
+          <ExportEventsButton
+            events={[...(upcomingEvents || []), ...(pastEvents || [])] as any}
+            boatName={boat.name}
+          />
+          {isOwnerOrAdmin && (
+            <>
+              <ImportEventsButton boatId={boatId} />
+              <CreateEventDialog boatId={boatId} />
+            </>
+          )}
+        </div>
       </div>
 
       <EventsViewToggle

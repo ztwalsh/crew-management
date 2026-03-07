@@ -18,6 +18,7 @@ import {
   User,
   Check,
   ChevronsUpDown,
+  MessageCircle,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/utils/supabase/client'
@@ -115,6 +116,8 @@ export function Sidebar({ profile, boats }: SidebarProps) {
     { label: 'Crew', icon: Users, path: '/crew' },
     { label: 'Settings', icon: Settings, path: '/settings' },
   ]
+
+  const workspaceChatHref = currentBoatId ? `/workspace/${currentBoatId}/chat` : null
 
   return (
     <aside
@@ -255,6 +258,24 @@ export function Sidebar({ profile, boats }: SidebarProps) {
               )
             })}
           </nav>
+        )}
+
+        {/* Workspace Chat link */}
+        {workspaceChatHref && (
+          <div className="px-2 mt-1">
+            <Link
+              href={workspaceChatHref}
+              title={collapsed ? 'Chat workspace' : undefined}
+              className={cn(
+                'flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors',
+                'bg-primary/10 text-primary hover:bg-primary/15 border border-primary/20',
+                collapsed && 'justify-center'
+              )}
+            >
+              <MessageCircle className="size-4 shrink-0" />
+              {!collapsed && <span className="font-medium">Chat Workspace</span>}
+            </Link>
+          </div>
         )}
 
         {currentBoatId && (

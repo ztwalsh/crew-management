@@ -7,6 +7,8 @@ import { Separator } from '@/components/ui/separator'
 import { CrewViewToggle } from '@/components/crew/crew-view-toggle'
 import { InviteCrewDialog } from '@/components/crew/invite-crew-dialog'
 import { RevokeInvitationButton } from '@/components/crew/revoke-invitation-button'
+import { ImportCrewButton } from '@/components/import/import-crew-button'
+import { ExportCrewButton } from '@/components/import/export-crew-button'
 import type { CrewRole, CrewMemberWithProfile } from '@/types'
 import { formatDistanceToNow } from 'date-fns'
 
@@ -87,9 +89,15 @@ export default async function CrewPage({
             </p>
           </div>
         </div>
-        {isOwnerOrAdmin && (
-          <InviteCrewDialog boatId={boatId} />
-        )}
+        <div className="flex items-center gap-2">
+          <ExportCrewButton members={sortedCrew} boatName={boat.name} />
+          {isOwnerOrAdmin && (
+            <>
+              <ImportCrewButton boatId={boatId} />
+              <InviteCrewDialog boatId={boatId} />
+            </>
+          )}
+        </div>
       </div>
 
       {/* Active crew members */}
